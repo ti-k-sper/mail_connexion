@@ -54,10 +54,13 @@ if (session_status() != PHP_SESSION_ACTIVE){
 
 if (isset($_SESSION["mail"]) && strtolower($_SESSION['mail']) == 'ok') {
 	$subject = "Connection sur votre site";
-	$mailto = "contact@apprendre.co";
-	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p>'];
+	$mailto = "chayannick@hotmail.fr";
+	$token = substr(md5(time()), 0, 12);
+	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p></ br><p>le token est : '.$token.'</p>'];
 	sendMail($subject, $mailto, $sendMail);
-	echo "mail envoyé";
+	echo "mail envoyé!</ br>";
+	fopen($token.'.php', 'w');
+	echo "fichier token.php crée!</ br>";
 	unset($_SESSION["mail"]);
 }else{
 	$_SESSION["mail"] = 'ok';
