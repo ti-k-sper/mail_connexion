@@ -54,8 +54,8 @@ if (session_status() != PHP_SESSION_ACTIVE){
 
 if (isset($_SESSION["mail"]) && strtolower($_SESSION['mail']) == 'ok') {
 	$subject = "Connection sur votre site";
-	$mailto = "chayannick@hotmail.fr";
-	$sendmail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p>'];
+	$mailto = "contact@apprendre.co";
+	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p>'];
 	sendMail($subject, $mailto, $sendMail);
 	echo "mail envoyé";
 	unset($_SESSION["mail"]);
