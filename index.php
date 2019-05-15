@@ -3,8 +3,11 @@ require_once 'config.php';
 require_once 'vendor/autoload.php';
 date_default_timezone_set('Europe/Paris');
 
-
 //Etape 1
+
+if (session_status() != PHP_SESSION_ACTIVE){
+	session_start();
+}
 
 function sendMail($subject, $pMailTo, $pMessage, $pMailToBcc = true){
 	require 'config.php';
@@ -48,15 +51,11 @@ function sendMail($subject, $pMailTo, $pMessage, $pMailToBcc = true){
 	return $mailer->send($message);
 }
 
-if (session_status() != PHP_SESSION_ACTIVE){
-	session_start();
-}
-
 if (isset($_SESSION["mail"]) && strtolower($_SESSION['mail']) == 'ok') {
 	$subject = "Connection sur votre site";
 	$mailto = "chayannick@hotmail.fr";
-	$token = substr(md5(time()), 0, 12);
-	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p></ br><p>le token est : '.$token.'</p>'];
+	$token = substr(md5(time()), 0, 12);//uniqid() => 13 caractères
+	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p></ br><p>Le token est : '.$token.'</p>'];
 	sendMail($subject, $mailto, $sendMail);
 	echo "mail envoyé!</ br>";
 	fopen($token.'.php', 'w');
