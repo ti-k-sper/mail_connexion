@@ -58,7 +58,7 @@ if (isset($_SESSION["mail"]) && strtolower($_SESSION['mail']) == 'ok') {
 	$sendMail = ["html" => '<h1>Connection sur votre site</h1><p>Une personne s\'est connectée sur votre site.</p></ br><p>Le token est : '.$token.'</p>'];
 	sendMail($subject, $mailto, $sendMail);
 	echo "mail envoyé!</ br>";
-	fopen($token.'.php', 'w');
+	fopen($token, 'w');
 	echo "fichier token.php crée!</ br>";
 	unset($_SESSION["mail"]);
 }else{
